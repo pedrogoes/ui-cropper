@@ -2,10 +2,10 @@
  * uiCropper v1.0.4
  * https://crackerakiua.github.io/ui-cropper/
  *
- * Copyright (c) 2016 Alex Kaul
+ * Copyright (c) 2017 Alex Kaul
  * License: MIT
  *
- * Generated at Friday, December 23rd, 2016, 3:05:21 PM
+ * Generated at Tuesday, July 11th, 2017, 5:23:13 PM
  */
 (function() {
 angular.module('uiCropper', []);
@@ -2446,6 +2446,9 @@ angular.module('uiCropper').factory('cropHost', ['$document', '$q', 'cropAreaCir
                         resultWidth = resultHeight * aspectRatio;
                     }
 
+                    temp_canvas.width = resultWidth;
+                    temp_canvas.height = resultHeight;
+
                     temp_ctx.drawImage(image,
                         x,
                         y,
@@ -3104,7 +3107,7 @@ angular.module('uiCropper').directive('uiCropper', ['$timeout', 'cropHost', 'cro
             /* if canvas is 100x100 crop coordinates will be x: 10, y: 10, w: 10, h: 10 */
             areaMinRelativeSize: '=?',
             resultImageSize: '=?',
-            resultImageFormat: '=?',
+            resultImageFormat: '@',
             resultImageQuality: '=?',
 
             aspectRatio: '=?',
@@ -3285,7 +3288,7 @@ angular.module('uiCropper').directive('uiCropper', ['$timeout', 'cropHost', 'cro
                     scope.onLoadError({});
                 }))
                 .on('area-move area-resize', fnSafeApply(function (scope) {
-                    if (scope.changeOnFly === 'true') {
+                    if (scope.changeOnFly === true) {
                         updateResultImage(scope);
                     }
                     updateCropject(scope);
